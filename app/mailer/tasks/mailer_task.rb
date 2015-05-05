@@ -5,6 +5,8 @@ end
 
 class Mailer < Volt::Task
   def deliver(view_path, attrs)
+    attrs = attrs.symbolize_keys
+
     raise ":to must be supplied when delivering e-mail" unless attrs[:to]
 
     subject = Volt::PathStringRenderer.new("#{view_path}/subject", attrs).html
@@ -33,12 +35,15 @@ class Mailer < Volt::Task
     attrs[:body] = text
 
     # Merge attrs into a copy of the mailer options
-    attrs = Volt.config.mailer.dup.merge(attrs) if Volt.config.mailer
+    attrs = Volt.config.mailer.to_h.dup.merge(attrs) if Volt.config.mailer
 
     allowed_opts = Pony.permissable_options
 
     pony_options = attrs.select {|k,v| allowed_opts.include?(k.to_sym) }
+
     # Send the e-mail
     Pony.mail(pony_options)
+
+    true
   end
 end
