@@ -3,8 +3,8 @@ unless RUBY_PLATFORM == 'opal'
   require 'volt/page/path_string_renderer'
 end
 
-class Mailer < Volt::Task
-  def deliver(view_path, attrs)
+module Mailer
+  def self.deliver(view_path, attrs)
     attrs = attrs.symbolize_keys
 
     raise ":to must be supplied when delivering e-mail" unless attrs[:to]
@@ -43,7 +43,5 @@ class Mailer < Volt::Task
 
     # Send the e-mail
     Pony.mail(pony_options)
-
-    true
   end
 end

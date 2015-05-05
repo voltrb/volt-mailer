@@ -1,5 +1,4 @@
-# Add mailer to the list of default loaded components
-Volt.config.default_components << 'mailer'
+require 'volt/mailer/mailer'
 
 module Volt
   module Mailer
