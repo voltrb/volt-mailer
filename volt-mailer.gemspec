@@ -19,6 +19,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "pony", "~> 1.11"
 
-  spec.add_development_dependency "volt", "~> 0.9.1.0"
+  spec.add_development_dependency "volt", "~> 0.9.0"
   spec.add_development_dependency "rake"
 end
