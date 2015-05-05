@@ -1,13 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-
-version = File.read(File.expand_path('../VERSION', __FILE__)).strip
-
+require 'volt/mailer/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "volt-mailer"
-  spec.version       = version
+  spec.version       = Volt::Mailer::VERSION
   spec.authors       = ["Ryan Stout"]
   spec.email         = ['ryan@agileproductions.com']
   spec.summary       = %q{A simple way to send e-mail from within a Volt app.}

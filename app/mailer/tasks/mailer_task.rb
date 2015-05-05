@@ -32,8 +32,8 @@ class Mailer < Volt::Task
     attrs[:html_body] = html
     attrs[:body] = text
 
-    # Merge in the default options
-    attrs.merge!(Volt.config.email) if Volt.config.email
+    # Merge attrs into a copy of the mailer options
+    attrs = Volt.config.mailer.dup.merge(attrs) if Volt.config.mailer
 
     allowed_opts = Pony.permissable_options
 
