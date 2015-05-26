@@ -4,21 +4,23 @@ unless RUBY_PLATFORM == 'opal'
 end
 
 module Mailer
-  def self.deliver(view_path, attrs)
+  def self.deliver(view_path, attrs, volt_app=nil)
+    volt_app ||= $volt_app
+
     attrs = attrs.symbolize_keys
 
     raise ":to must be supplied when delivering e-mail" unless attrs[:to]
 
-    subject = Volt::PathStringRenderer.new("#{view_path}/subject", attrs).html
+    subject = Volt::PathStringRenderer.new(volt_app, "#{view_path}/subject", attrs).html
 
     text = begin
-      Volt::PathStringRenderer.new("#{view_path}/text", attrs).html
+      Volt::PathStringRenderer.new(volt_app, "#{view_path}/text", attrs).html
     rescue ViewLookupException => e
       nil
     end
 
     html = begin
-      Volt::PathStringRenderer.new("#{view_path}/html", attrs).html
+      Volt::PathStringRenderer.new(volt_app, "#{view_path}/html", attrs).html
     rescue ViewLookupException => e
       nil
     end
