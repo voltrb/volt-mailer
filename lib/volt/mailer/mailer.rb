@@ -15,13 +15,13 @@ module Mailer
 
     text = begin
       Volt::PathStringRenderer.new(volt_app, "#{view_path}/text", attrs).html
-    rescue ViewLookupException => e
+    rescue Volt::ViewLookupException => e
       nil
     end
 
     html = begin
       Volt::PathStringRenderer.new(volt_app, "#{view_path}/html", attrs).html
-    rescue ViewLookupException => e
+    rescue Volt::ViewLookupException => e
       nil
     end
 
