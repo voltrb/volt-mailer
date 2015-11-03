@@ -25,7 +25,7 @@ module Mailer
       nil
     end
 
-    if !text && !body
+    if !text && !html
       raise "No text or html version of the e-mail supplied in #{view_path}"
     end
 
